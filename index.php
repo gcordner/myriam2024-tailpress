@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<div class="container mx-auto my-8">
+<div class="w-full">
 
 	<?php if ( have_posts() ) : ?>
 		<?php

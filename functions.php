@@ -1,4 +1,11 @@
 <?php
+/**
+ * Functions.php
+ *
+ * This file contains the theme setup and enqueue scripts functions.
+ *
+ * @package Tailpress
+ */
 
 /**
  * Theme setup.
@@ -23,7 +30,7 @@ function tailpress_setup() {
 		)
 	);
 
-    add_theme_support( 'custom-logo' );
+	add_theme_support( 'custom-logo' );
 	add_theme_support( 'post-thumbnails' );
 
 	add_theme_support( 'align-wide' );
@@ -52,7 +59,7 @@ add_action( 'wp_enqueue_scripts', 'tailpress_enqueue_scripts' );
 /**
  * Get asset path.
  *
- * @param string  $path Path to asset.
+ * @param string $path Path to asset.
  *
  * @return string
  */
@@ -61,7 +68,7 @@ function tailpress_asset( $path ) {
 		return get_stylesheet_directory_uri() . '/' . $path;
 	}
 
-	return add_query_arg( 'time', time(),  get_stylesheet_directory_uri() . '/' . $path );
+	return add_query_arg( 'time', time(), get_stylesheet_directory_uri() . '/' . $path );
 }
 
 /**
@@ -109,3 +116,21 @@ function tailpress_nav_menu_add_submenu_class( $classes, $args, $depth ) {
 }
 
 add_filter( 'nav_menu_submenu_css_class', 'tailpress_nav_menu_add_submenu_class', 10, 3 );
+
+function myriam_register_block_pattern_category() {
+	if ( function_exists( 'register_block_pattern_category' ) ) {
+		register_block_pattern_category(
+			'myriam-gurba',
+			array(
+				'label' => __( 'Myriam Gurba', 'myriam-gurba' ),
+			)
+		);
+	}
+}
+
+add_action( 'init', 'myriam_register_block_pattern_category' );
+
+/**
+ * Block patterns.
+ */
+require_once get_stylesheet_directory() . '/patterns/myriam-hero.php';
